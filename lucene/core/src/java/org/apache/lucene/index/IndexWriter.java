@@ -1053,6 +1053,7 @@ public class IndexWriter
                   + "\" is missing from index",
               ioe);
         }
+        System.out.println("GGG:IndexWriter.init():lastCommit="+lastCommit+",segmentInfos="+segmentInfos);
 
         if (reader.writer != null) {
 

@@ -135,6 +135,7 @@ public final class StandardDirectoryReader extends DirectoryReader {
         // IndexWriter's segmentInfos:
         final SegmentCommitInfo info = infos.info(i);
         assert info.info.dir == dir;
+        System.out.println("GGG:StandardDirectoryReader.open:segmentInfo i="+i+":info="+info+":infos="+infos);
         final SegmentReader reader = readerFunction.apply(info);
         if (reader.numDocs() > 0
             || writer.getConfig().mergePolicy.keepFullyDeletedSegment(() -> reader)) {

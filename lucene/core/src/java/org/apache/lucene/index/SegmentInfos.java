@@ -293,7 +293,7 @@ public final class SegmentInfos implements Cloneable, Iterable<SegmentCommitInfo
       throws IOException {
 
     long generation = generationFromSegmentsFileName(segmentFileName);
-    // System.out.println(Thread.currentThread() + ": SegmentInfos.readCommit " + segmentFileName);
+    System.out.println(Thread.currentThread() + ":GGG: SegmentInfos.readCommit " + segmentFileName);
     try (ChecksumIndexInput input = directory.openChecksumInput(segmentFileName, IOContext.READ)) {
       try {
         return readCommit(directory, input, generation, minSupportedMajorVersion);
@@ -378,7 +378,7 @@ public final class SegmentInfos implements Cloneable, Iterable<SegmentCommitInfo
   private static void parseSegmentInfos(
       Directory directory, DataInput input, SegmentInfos infos, int format) throws IOException {
     infos.version = CodecUtil.readBELong(input);
-    // System.out.println("READ sis version=" + infos.version);
+    System.out.println("GGG:READ sis version=" + infos.version);
     if (format > VERSION_70) {
       infos.counter = input.readVLong();
     } else {

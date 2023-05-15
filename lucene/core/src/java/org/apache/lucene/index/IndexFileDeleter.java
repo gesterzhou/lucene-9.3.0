@@ -21,6 +21,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -125,6 +126,7 @@ final class IndexFileDeleter implements Closeable {
     this.writer = writer;
 
     final String currentSegmentsFile = segmentInfos.getSegmentsFileName();
+    System.out.println("GGG:IndexFileDeleter:segmentInfos="+segmentInfos+":currentSegmentsFile="+currentSegmentsFile+":files="+ Arrays.toString(files));
 
     if (infoStream.isEnabled("IFD")) {
       infoStream.message(

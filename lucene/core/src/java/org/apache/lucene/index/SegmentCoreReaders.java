@@ -161,9 +161,9 @@ final class SegmentCoreReaders {
 
       success = true;
     } catch (EOFException | FileNotFoundException e) {
-      throw new CorruptIndexException("Problem reading index from " + dir, dir.toString(), e);
+      throw new CorruptIndexException("Problem reading index from " + dir+":si="+si, dir.toString(), e);
     } catch (NoSuchFileException e) {
-      throw new CorruptIndexException("Problem reading index.", e.getFile(), e);
+      throw new CorruptIndexException("Problem reading index.si="+si, e.getFile(), e);
     } finally {
       if (!success) {
         decRef();

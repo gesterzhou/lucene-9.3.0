@@ -41,7 +41,9 @@ public abstract class BaseDirectory extends Directory {
 
   @Override
   public final Lock obtainLock(String name) throws IOException {
-    return lockFactory.obtainLock(this, name);
+    Lock lock = lockFactory.obtainLock(this, name);
+    System.out.println("GGG:BaseDirectory:obtainLock:"+name+",lock="+lock+":dir="+this);
+    return lock;
   }
 
   @Override
