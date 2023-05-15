@@ -647,6 +647,8 @@ final class IndexFileDeleter implements Closeable {
       try {
         if (decRef(file)) {
           toDelete.add(file);
+        } else {
+          System.out.println("GGG:decRef, not to delete:"+file);
         }
       } catch (Throwable t) {
         firstThrowable = IOUtils.useOrSuppress(firstThrowable, t);
@@ -654,6 +656,7 @@ final class IndexFileDeleter implements Closeable {
     }
 
     try {
+      System.out.println("GGG:decRef:toDelete="+toDelete);
       deleteFiles(toDelete);
     } catch (Throwable t) {
       firstThrowable = IOUtils.useOrSuppress(firstThrowable, t);
