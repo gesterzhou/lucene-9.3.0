@@ -22,6 +22,7 @@ import static org.apache.lucene.util.ByteBlockPool.BYTE_BLOCK_SIZE;
 import java.io.Closeable;
 import java.io.IOException;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -1053,7 +1054,8 @@ public class IndexWriter
                   + "\" is missing from index",
               ioe);
         }
-        System.out.println("GGG:IndexWriter.init():lastCommit="+lastCommit+",segmentInfos="+segmentInfos);
+        System.out.printf("%s <%s> tid=0x%x %s\n", LocalDateTime.now(), Thread.currentThread().getName(), Thread.currentThread().getId(),
+        ":GGG:IndexWriter.init():lastCommit="+lastCommit+",segmentInfos="+segmentInfos);
 
         if (reader.writer != null) {
 

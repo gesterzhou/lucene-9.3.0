@@ -20,6 +20,7 @@ import java.io.Closeable;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.NoSuchFileException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -126,7 +127,8 @@ final class IndexFileDeleter implements Closeable {
     this.writer = writer;
 
     final String currentSegmentsFile = segmentInfos.getSegmentsFileName();
-    System.out.println("GGG:IndexFileDeleter:segmentInfos="+segmentInfos+":currentSegmentsFile="+currentSegmentsFile+":files="+ Arrays.toString(files));
+    System.out.printf("%s <%s> tid=0x%x %s\n", LocalDateTime.now(), Thread.currentThread().getName(), Thread.currentThread().getId(),
+            ":GGG:IndexFileDeleter:segmentInfos="+segmentInfos+":currentSegmentsFile="+currentSegmentsFile+":files="+ Arrays.toString(files));
 
     if (infoStream.isEnabled("IFD")) {
       infoStream.message(
@@ -648,7 +650,8 @@ final class IndexFileDeleter implements Closeable {
         if (decRef(file)) {
           toDelete.add(file);
         } else {
-          System.out.println("GGG:decRef, not to delete:"+file);
+          System.out.printf("%s <%s> tid=0x%x %s\n", LocalDateTime.now(), Thread.currentThread().getName(), Thread.currentThread().getId(),
+          ":GGG:decRef, not to delete:"+file);
         }
       } catch (Throwable t) {
         firstThrowable = IOUtils.useOrSuppress(firstThrowable, t);
@@ -656,7 +659,8 @@ final class IndexFileDeleter implements Closeable {
     }
 
     try {
-      System.out.println("GGG:decRef:toDelete="+toDelete);
+      System.out.printf("%s <%s> tid=0x%x %s\n", LocalDateTime.now(), Thread.currentThread().getName(), Thread.currentThread().getId(),
+      ":GGG:decRef:toDelete="+toDelete);
       deleteFiles(toDelete);
     } catch (Throwable t) {
       firstThrowable = IOUtils.useOrSuppress(firstThrowable, t);

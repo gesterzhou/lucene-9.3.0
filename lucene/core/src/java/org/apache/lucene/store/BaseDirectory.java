@@ -17,6 +17,7 @@
 package org.apache.lucene.store;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 /**
  * Base implementation for a concrete {@link Directory} that uses a {@link LockFactory} for locking.
@@ -42,7 +43,8 @@ public abstract class BaseDirectory extends Directory {
   @Override
   public final Lock obtainLock(String name) throws IOException {
     Lock lock = lockFactory.obtainLock(this, name);
-    System.out.println("GGG:BaseDirectory:obtainLock:"+name+",lock="+lock+":dir="+this);
+    System.out.printf("%s <%s> tid=0x%x %s\n", LocalDateTime.now(), Thread.currentThread().getName(), Thread.currentThread().getId(),
+    ":GGG:BaseDirectory:obtainLock:"+name+",lock="+lock+":dir="+this);
     return lock;
   }
 

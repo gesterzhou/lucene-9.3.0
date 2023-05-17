@@ -21,6 +21,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.file.NoSuchFileException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -293,7 +294,8 @@ public final class SegmentInfos implements Cloneable, Iterable<SegmentCommitInfo
       throws IOException {
 
     long generation = generationFromSegmentsFileName(segmentFileName);
-    System.out.println(Thread.currentThread() + ":GGG: SegmentInfos.readCommit " + segmentFileName);
+    System.out.printf("%s <%s> tid=0x%x %s\n", LocalDateTime.now(), Thread.currentThread().getName(), Thread.currentThread().getId(),
+    ":GGG: SegmentInfos.readCommit " + segmentFileName);
     try (ChecksumIndexInput input = directory.openChecksumInput(segmentFileName, IOContext.READ)) {
       try {
         return readCommit(directory, input, generation, minSupportedMajorVersion);
@@ -378,7 +380,8 @@ public final class SegmentInfos implements Cloneable, Iterable<SegmentCommitInfo
   private static void parseSegmentInfos(
       Directory directory, DataInput input, SegmentInfos infos, int format) throws IOException {
     infos.version = CodecUtil.readBELong(input);
-    System.out.println("GGG:READ sis version=" + infos.version);
+    System.out.printf("%s <%s> tid=0x%x %s\n", LocalDateTime.now(), Thread.currentThread().getName(), Thread.currentThread().getId(),
+    ":GGG:READ sis version=" + infos.version);
     if (format > VERSION_70) {
       infos.counter = input.readVLong();
     } else {

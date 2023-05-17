@@ -18,6 +18,7 @@ package org.apache.lucene.index;
 
 import java.io.Closeable;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -135,7 +136,8 @@ public final class StandardDirectoryReader extends DirectoryReader {
         // IndexWriter's segmentInfos:
         final SegmentCommitInfo info = infos.info(i);
         assert info.info.dir == dir;
-        System.out.println("GGG:StandardDirectoryReader.open:segmentInfo i="+i+":info="+info+":infos="+infos);
+        System.out.printf("%s <%s> tid=0x%x %s\n", LocalDateTime.now(), Thread.currentThread().getName(), Thread.currentThread().getId(),
+        ":GGG:StandardDirectoryReader.open:segmentInfo i="+i+":info="+info+":infos="+infos);
         final SegmentReader reader = readerFunction.apply(info);
         if (reader.numDocs() > 0
             || writer.getConfig().mergePolicy.keepFullyDeletedSegment(() -> reader)) {
