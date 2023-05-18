@@ -921,7 +921,7 @@ public final class SegmentInfos implements Cloneable, Iterable<SegmentCommitInfo
       final SegmentCommitInfo info = info(i);
       files.addAll(info.files());
     }
-    
+
     return files;
   }
 
@@ -953,11 +953,11 @@ public final class SegmentInfos implements Cloneable, Iterable<SegmentCommitInfo
       if (successRenameAndSync == false) {
         // deletes pending_segments_N:
         rollbackCommit(dir);
-        System.out.printf("%s <%s> tid=0x%x %s\n", LocalDateTime.now(), Thread.currentThread().getName(), Thread.currentThread().getId(),
-                ":GGG: before delete dest" + dest);
-        IOUtils.deleteFilesIgnoringExceptions(dir, dest);
-        System.out.printf("%s <%s> tid=0x%x %s\n", LocalDateTime.now(), Thread.currentThread().getName(), Thread.currentThread().getId(),
-                ":GGG: after delete dest" + dest);
+//        System.out.printf("%s <%s> tid=0x%x %s\n", LocalDateTime.now(), Thread.currentThread().getName(), Thread.currentThread().getId(),
+//                ":GGG: before delete dest" + dest);
+//        IOUtils.deleteFilesIgnoringExceptions(dir, dest);
+//        System.out.printf("%s <%s> tid=0x%x %s\n", LocalDateTime.now(), Thread.currentThread().getName(), Thread.currentThread().getId(),
+//                ":GGG: after delete dest" + dest);
       }
     }
 
