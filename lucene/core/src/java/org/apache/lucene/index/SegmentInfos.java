@@ -921,9 +921,7 @@ public final class SegmentInfos implements Cloneable, Iterable<SegmentCommitInfo
       final SegmentCommitInfo info = info(i);
       files.addAll(info.files());
     }
-
-    System.out.printf("%s <%s> tid=0x%x %s\n", LocalDateTime.now(), Thread.currentThread().getName(), Thread.currentThread().getId(),
-            ":GGG: SegmentInfos.readCommit " + segmentFileName);
+    
     return files;
   }
 
