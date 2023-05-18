@@ -605,6 +605,8 @@ final class IndexFileDeleter implements Closeable {
 
       // Save files so we can decr on next checkpoint/commit:
       lastFiles.addAll(segmentInfos.files(false));
+      System.out.printf("%s <%s> tid=0x%x %s\n", LocalDateTime.now(), Thread.currentThread().getName(), Thread.currentThread().getId(),
+              ":GGG: after addAll to lastFiles:" + lastFiles+":segmentFileName="+segmentInfos.getSegmentsFileName());
     }
 
     if (infoStream.isEnabled("IFD")) {

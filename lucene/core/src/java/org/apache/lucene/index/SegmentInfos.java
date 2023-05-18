@@ -922,6 +922,8 @@ public final class SegmentInfos implements Cloneable, Iterable<SegmentCommitInfo
       files.addAll(info.files());
     }
 
+    System.out.printf("%s <%s> tid=0x%x %s\n", LocalDateTime.now(), Thread.currentThread().getName(), Thread.currentThread().getId(),
+            ":GGG: SegmentInfos.readCommit " + segmentFileName);
     return files;
   }
 
@@ -932,10 +934,11 @@ public final class SegmentInfos implements Cloneable, Iterable<SegmentCommitInfo
     }
     boolean successRenameAndSync = false;
     final String dest;
+    dest = IndexFileNames.fileNameFromGeneration(IndexFileNames.SEGMENTS, "", generation);
     try {
       final String src =
           IndexFileNames.fileNameFromGeneration(IndexFileNames.PENDING_SEGMENTS, "", generation);
-      dest = IndexFileNames.fileNameFromGeneration(IndexFileNames.SEGMENTS, "", generation);
+//      dest = IndexFileNames.fileNameFromGeneration(IndexFileNames.SEGMENTS, "", generation);
       dir.rename(src, dest);
       try {
         dir.syncMetaData();
@@ -952,6 +955,11 @@ public final class SegmentInfos implements Cloneable, Iterable<SegmentCommitInfo
       if (successRenameAndSync == false) {
         // deletes pending_segments_N:
         rollbackCommit(dir);
+        System.out.printf("%s <%s> tid=0x%x %s\n", LocalDateTime.now(), Thread.currentThread().getName(), Thread.currentThread().getId(),
+                ":GGG: before delete dest" + dest);
+        IOUtils.deleteFilesIgnoringExceptions(dir, dest);
+        System.out.printf("%s <%s> tid=0x%x %s\n", LocalDateTime.now(), Thread.currentThread().getName(), Thread.currentThread().getId(),
+                ":GGG: after delete dest" + dest);
       }
     }
 
