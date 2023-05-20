@@ -296,6 +296,7 @@ public final class SegmentInfos implements Cloneable, Iterable<SegmentCommitInfo
     long generation = generationFromSegmentsFileName(segmentFileName);
     System.out.printf("%s <%s> tid=0x%x %s\n", LocalDateTime.now(), Thread.currentThread().getName(), Thread.currentThread().getId(),
     ":GGG: SegmentInfos.readCommit " + segmentFileName);
+    new Exception("GGG:<" + Thread.currentThread().getName()+">").printStackTrace(System.out);
     try (ChecksumIndexInput input = directory.openChecksumInput(segmentFileName, IOContext.READ)) {
       try {
         return readCommit(directory, input, generation, minSupportedMajorVersion);
