@@ -202,11 +202,15 @@ public final class SegmentInfos implements Cloneable, Iterable<SegmentCommitInfo
           // skipping this file here helps deliver the right exception when opening an old index
           file.startsWith(OLD_SEGMENTS_GEN) == false) {
         long gen = generationFromSegmentsFileName(file);
+        System.out.printf("%s <%s> tid=0x%x %s\n", LocalDateTime.now(), Thread.currentThread().getName(), Thread.currentThread().getId(),
+                    ":GGG: file="+file+":gen="+gen);
         if (gen > max) {
           max = gen;
         }
       }
     }
+    new Exception("GGG:getLastCommitGeneration:<" + Thread.currentThread().getName()
+            +">"+":max="+max).printStackTrace(System.out);
     return max;
   }
 
